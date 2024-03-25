@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anime', function (Blueprint $table) {
+        Schema::create('animes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('synopsis')->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('image_url')->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

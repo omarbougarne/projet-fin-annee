@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnimeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -17,16 +19,17 @@ Route::post('/users', [UserController::class, 'store']);
 Route::post('/logout', [UserController::class, 'logout']);
 Route::get('/login', [UserController::class, 'login']);
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+Route::resource('anime', AnimeController::class);
 Route::group(['middleware' => 'role:admin'], function () {
-    // Routes accessible only to admin users
+    //sooooon
 });
 
 Route::group(['middleware' => 'role:mod'], function () {
-    // Routes accessible only to moderator users
+    // sooooooon
 });
 
 Route::group(['middleware' => 'role:user'], function () {
-    // Routes accessible only to regular users
+    // sooooooooooooon
 });
 
 

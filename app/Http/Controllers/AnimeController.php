@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnimeController extends Controller
 {
@@ -28,17 +29,27 @@ class AnimeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required',
-            // Add validation rules for other fields
-        ]);
+{
+    $request->validate([
+        'title' => 'required',
+        // Add validation rules for other fields
+    ]);
 
-        Anime::create($request->all());
+    // Get the authenticated user
+    $user = auth()->user();
 
-        return redirect()->route('anime.index')
-            ->with('success', 'Anime created successfully.');
-    }
+    // Create a new anime record associated with the authenticated user
+    $anime = new Anime([
+        'title' => $request->title,
+        // 'user_id' => $user->id, // Set the user_id field
+    ]);
+    $anime->save();
+
+    return redirect()->route('anime.index')
+        ->with('success', 'Anime created successfully.');
+}
+
+
 
     /**
      * Display the specified resource.
