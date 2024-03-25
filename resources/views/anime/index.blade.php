@@ -9,26 +9,19 @@
 <body>
     <div class="container">
         <h1>Anime List</h1>
-
-        <!-- Form to add new anime -->
         <form action="{{ route('anime.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" name="title" class="form-control" required>
             </div>
-            <!-- Add other fields here -->
             <button type="submit" class="btn btn-primary">Add Anime</button>
         </form>
-
         <hr>
-
-        <!-- Table to display anime entries -->
         <table class="table">
             <thead>
                 <tr>
                     <th>Title</th>
-                    <!-- Add other columns as needed -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -36,7 +29,6 @@
                 @foreach($anime as $animeEntry)
                     <tr>
                         <td>{{ $animeEntry->title }}</td>
-                        <!-- Add other columns as needed -->
                         <td>
                             <a href="{{ route('anime.edit', ['anime' => $animeEntry->id]) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('anime.destroy', ['anime' => $animeEntry->id]) }}" method="POST" style="display: inline-block;">
