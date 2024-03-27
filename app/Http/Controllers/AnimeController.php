@@ -32,13 +32,8 @@ class AnimeController extends Controller
 {
     $request->validate([
         'title' => 'required',
-        // Add validation rules for other fields
     ]);
-
-    // Get the authenticated user
     $user = auth()->user();
-
-    // Create a new anime record associated with the authenticated user
     $anime = new Anime([
         'title' => $request->title,
         // 'user_id' => $user->id, // Set the user_id field
@@ -74,7 +69,6 @@ class AnimeController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            // Add validation rules for other fields
         ]);
 
         $anime->update($request->all());
