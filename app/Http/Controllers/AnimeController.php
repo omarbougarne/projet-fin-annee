@@ -30,13 +30,31 @@ class AnimeController extends Controller
      */
     public function store(Request $request)
 {
+    // dd($request->image_url);
+
     $request->validate([
-        'title' => 'required',
+        'title' => 'required|string',
+        'synopsis' => 'nullable|string',
+        'episodes' => 'nullable|integer',
+        'status' => 'nullable|in:ongoing,completed,on_hold,dropped',
+        'rating' => 'nullable|string',
+        'start_date' => 'nullable|date',
+        'end_date' => 'nullable|date',
+        'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
-    $user = auth()->user();
+if ($request->hasFile('image_url')) {
+    $imagePath = $request->file('image_url')->store('images', 'public');
+}
+    // $user = auth()->user();
     $anime = new Anime([
         'title' => $request->title,
-        // 'user_id' => $user->id, // Set the user_id field
+        'synopsis' => $request->synopsis,
+        'episodes' => $request->episodes,
+        'status' => $request->status,
+        'rating' => $request->rating,
+        'start_date' => $request->start_date,
+        'end_date' => $request->end_date,
+        'image_url' => $imagePath,
     ]);
     $anime->save();
 

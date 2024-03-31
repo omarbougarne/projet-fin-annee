@@ -11,7 +11,7 @@ class UserController extends Controller
         return view('users.register');
     }
 
-    // Create New User
+
     public function store(Request $request) {
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
@@ -20,20 +20,19 @@ class UserController extends Controller
             'role' => 'required|string|in:user,admin,mod',
         ]);
 
-        // Hash Password
+
         $formFields['password'] = bcrypt($formFields['password']);
 
-        // Create User
+
         $user = User::create($formFields);
 
-        // Login
+
         auth()->login($user);
 
         return redirect('/')->with('message', 'User created and logged in');
     }
 
 
-    // Logout User
     public function logout(Request $request) {
         auth()->logout();
 
@@ -44,12 +43,12 @@ class UserController extends Controller
 
     }
 
-    // Show Login Form
+
     public function login() {
         return view('users.login');
     }
 
-    // Authenticate User
+
     public function authenticate(Request $request) {
         $formFields = $request->validate([
             'email' => ['required', 'email'],

@@ -10,6 +10,13 @@ class Anime extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        'synopsis',
+        'episodes',
+        'status',
+        'rating',
+        'start_date',
+        'end_date',
+        'image_url',
     ];
 
     public function user()
